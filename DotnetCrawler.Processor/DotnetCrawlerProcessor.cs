@@ -49,6 +49,15 @@ namespace DotnetCrawler.Processor
                         if (node != null)
                             columnValue = node.InnerText;
                         break;
+                    case SelectorType.XPathAttribute:
+                        var nodeWithAttr = entityNode.SelectSingleNode(fieldExpression);
+                        if (nodeWithAttr != null)
+                        {
+                            int atIndex = fieldExpression.LastIndexOf("@")+1;
+                            columnValue = nodeWithAttr.GetAttributeValue(fieldExpression.Substring(atIndex, fieldExpression.Length-atIndex),"");
+                        }
+
+                        break;
                     case SelectorType.CssSelector:
                         var nodeCss = entityNode.QuerySelector(fieldExpression);
                         if (nodeCss != null)

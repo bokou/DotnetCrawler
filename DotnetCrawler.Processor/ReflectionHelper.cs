@@ -45,7 +45,20 @@ namespace DotnetCrawler.Processor
         {
             var prop = obj.GetType().GetProperty(property, BindingFlags.Public | BindingFlags.Instance);
             if (prop != null && prop.CanWrite)
-                prop.SetValue(obj, value, null);
+            {
+                if ("Decimal" == prop.PropertyType.Name)
+                {
+                    decimal number;
+                    if (value!=null && Decimal.TryParse(value.ToString(), out number))
+                    {
+                        prop.SetValue(obj, number, null);
+                    }
+                }
+                else
+                {
+                    prop.SetValue(obj, value, null);
+                }
+            }
         }
     }
 }

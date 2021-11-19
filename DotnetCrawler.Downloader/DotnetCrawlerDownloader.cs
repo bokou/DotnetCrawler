@@ -69,13 +69,20 @@ namespace DotnetCrawler.Downloader
                 htmlpage = parts[parts.Length - 1];
             }
 
+            if (htmlpage.Length>12)
+            {
+                htmlpage = htmlpage.Substring(0, 12);
+            }
+
             if (!htmlpage.Contains(".html"))
             {
                 htmlpage = htmlpage + ".html";
             }
-            htmlpage = htmlpage.Replace("=", "").Replace("?", "");
+
+            htmlpage = htmlpage.Replace("=", "").Replace("?", "").Replace(":","");
 
             _localFilePath = $"{DownloadPath}{htmlpage}";
+
         }
 
         private HtmlDocument GetExistingFile(string fullPath)

@@ -58,7 +58,7 @@ namespace DotnetCrawler.Core
 
             foreach (var url in links)
             {
-                var document = await Downloader.Download(url);
+                var document = await Downloader.Download(url); 
                 var entity = await Processor.Process(document);
                 await Pipeline.Run(entity);
             }

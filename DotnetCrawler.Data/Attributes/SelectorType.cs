@@ -10,6 +10,7 @@ namespace DotnetCrawler.Data.Attributes
     public enum SelectorType
     {
         XPath,
+        XPathAttribute,
         CssSelector,
         FixedValue
     }
